@@ -46,6 +46,8 @@ const TRANSLATIONS = {
     disclaimer: "Keine Rechtsberatung – nur allgemeine Information.",
     disclaimerBanner: "Keine Rechtsberatung – nur allgemeine Information über Verbraucherrechte.",
     noTemplate: "Für diesen Fall ist kein Musterbrief verfügbar.",
+    casesSingular: "Fall",
+    casesPlural: "Fälle",
 
     // === Categories ===
     catTravel: "Flug & Reise",
@@ -357,6 +359,8 @@ const TRANSLATIONS = {
     disclaimer: "Not legal advice – general information only.",
     disclaimerBanner: "Not legal advice – general information about consumer rights only.",
     noTemplate: "No template letter available for this case.",
+    casesSingular: "case",
+    casesPlural: "cases",
 
     // === Categories ===
     catTravel: "Flight & Travel",
@@ -456,6 +460,8 @@ const TRANSLATIONS = {
     disclaimer: "Hukuki danışmanlık değildir – yalnızca genel bilgi.",
     disclaimerBanner: "Hukuki danışmanlık değildir – yalnızca tüketici hakları hakkında genel bilgi.",
     noTemplate: "Bu durum için örnek mektup mevcut değil.",
+    casesSingular: "durum",
+    casesPlural: "durum",
     catTravel: "Uçuş & Seyahat",
     catShopping: "Online Alışveriş",
     catHousing: "Kira & Konut",
@@ -551,6 +557,8 @@ const TRANSLATIONS = {
     disclaimer: "No es asesoramiento legal – solo información general.",
     disclaimerBanner: "No es asesoramiento legal – solo información general sobre derechos del consumidor.",
     noTemplate: "No hay carta modelo disponible para este caso.",
+    casesSingular: "caso",
+    casesPlural: "casos",
     catTravel: "Vuelo & Viaje",
     catShopping: "Compras Online",
     catHousing: "Alquiler & Vivienda",
@@ -646,6 +654,8 @@ const TRANSLATIONS = {
     disclaimer: "Pas de conseil juridique – information générale uniquement.",
     disclaimerBanner: "Pas de conseil juridique – information générale sur les droits des consommateurs uniquement.",
     noTemplate: "Pas de lettre modèle disponible pour ce cas.",
+    casesSingular: "cas",
+    casesPlural: "cas",
     catTravel: "Vol & Voyage",
     catShopping: "Achats en Ligne",
     catHousing: "Location & Logement",

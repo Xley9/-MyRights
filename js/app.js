@@ -177,7 +177,7 @@ const App = (function () {
       return `<div class="category-card" onclick="App.showCategory('${cat.id}')">
         <div class="category-emoji">${cat.emoji}</div>
         <div class="category-name">${t(cat.i18nKey)}</div>
-        <div class="category-count">${count} ${count === 1 ? "Fall" : "Fälle"}</div>
+        <div class="category-count">${count} ${t(count === 1 ? "casesSingular" : "casesPlural")}</div>
       </div>`;
     }).join("");
   }
