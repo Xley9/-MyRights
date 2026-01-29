@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Verbraucherrechte in Deutschland: 20 häufigste Situationen, Musterbriefe & Schritt-für-Schritt-Anleitungen – offline verfügbar.">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyRights – Deine Rechte, sofort</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon-192.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo" onclick="App.goHome()">
+      <img src="img/favicon.svg" alt="MyRights">
+      <span>MyRights</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="favNavBtn" onclick="App.showFavorites()" title="Favoriten" aria-label="Favoriten">&#9733;</button>
+      <button class="icon-btn" id="themeBtn" onclick="App.cycleTheme()" title="Theme" aria-label="Theme wechseln">&#9790;</button>
+      <button class="icon-btn" id="settingsBtn" onclick="App.openSettings()" title="Einstellungen" aria-label="Einstellungen">&#9881;</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main" id="mainContent">
+
+    <!-- Onboarding -->
+    <section class="onboarding" id="onboarding">
+      <div class="onboarding-step active" data-step="0">
+        <div class="onboarding-emoji">&#9878;&#65039;</div>
+        <div class="onboarding-title" data-i18n="onboardingTitle1">Deine Rechte kennen</div>
+        <div class="onboarding-text" data-i18n="onboardingText1">20 häufigste Rechtssituationen in Deutschland – verständlich erklärt mit Gesetzesreferenzen.</div>
+      </div>
+      <div class="onboarding-step" data-step="1">
+        <div class="onboarding-emoji">&#128221;</div>
+        <div class="onboarding-title" data-i18n="onboardingTitle2">Musterbriefe kopieren</div>
+        <div class="onboarding-text" data-i18n="onboardingText2">Fertige Vorlagen für deine Situation – mit einem Klick kopieren und anpassen.</div>
+      </div>
+      <div class="onboarding-step" data-step="2">
+        <div class="onboarding-emoji">&#128247;</div>
+        <div class="onboarding-title" data-i18n="onboardingTitle3">Offline verfügbar</div>
+        <div class="onboarding-text" data-i18n="onboardingText3">Alle Informationen sind offline gespeichert – auch ohne Internet immer griffbereit.</div>
+      </div>
+      <div class="onboarding-dots">
+        <div class="onboarding-dot active" data-dot="0"></div>
+        <div class="onboarding-dot" data-dot="1"></div>
+        <div class="onboarding-dot" data-dot="2"></div>
+      </div>
+      <button class="btn btn-primary" id="onboardingNext" onclick="App.nextOnboarding()" data-i18n="onboardingNext">Weiter</button>
+    </section>
+
+    <!-- App Content -->
+    <div id="appContent" class="hidden">
+
+      <!-- Home View -->
+      <section id="homeView">
+        <div class="search-container">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Suche z.B. Flug verspätet, Kaution..." oninput="App.onSearch(this.value)">
+          <button class="search-clear" id="searchClear" onclick="App.clearSearch()">&#10005;</button>
+        </div>
+
+        <!-- Search Results -->
+        <div id="searchResults" class="hidden">
+          <div class="back-row">
+            <h2 class="section-title" data-i18n="searchResults">Suchergebnisse</h2>
+          </div>
+          <div class="rights-list" id="searchResultsList"></div>
+        </div>
+
+        <!-- Categories -->
+        <div id="categoriesSection">
+          <h2 class="section-title" data-i18n="categoriesTitle">Kategorien</h2>
+          <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+
+        <!-- Recent / Popular -->
+        <div id="popularSection">
+          <h2 class="section-title" data-i18n="popularTitle">Häufig gesucht</h2>
+          <div class="rights-list" id="popularList"></div>
+        </div>
+      </section>
+
+      <!-- Category View -->
+      <section id="categoryView" class="hidden">
+        <div class="back-row">
+          <button class="back-btn" onclick="App.goHome()">&#8592; <span data-i18n="back">Zurück</span></button>
+          <h2 class="back-title" id="categoryTitle"></h2>
+        </div>
+        <div class="rights-list" id="categoryRightsList"></div>
+      </section>
+
+      <!-- Detail View -->
+      <section id="detailView" class="hidden detail-view">
+        <div class="back-row">
+          <button class="back-btn" id="detailBackBtn" onclick="App.goBackFromDetail()">&#8592; <span data-i18n="back">Zurück</span></button>
+        </div>
+
+        <div class="detail-header">
+          <div class="detail-emoji" id="detailEmoji"></div>
+          <div>
+            <div class="detail-title" id="detailTitle"></div>
+            <div class="detail-category" id="detailCategory"></div>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn btn-secondary" id="detailFavBtn" onclick="App.toggleFavorite()">
+            <span id="detailFavIcon">&#9734;</span> <span id="detailFavText" data-i18n="addFavorite">Merken</span>
+          </button>
+          <button class="btn btn-secondary" onclick="App.shareRight()">
+            &#8599; <span data-i18n="share">Teilen</span>
+          </button>
+        </div>
+
+        <!-- Situation -->
+        <div class="detail-section">
+          <div class="detail-section-title">&#128161; <span data-i18n="situation">Deine Situation</span></div>
+          <div class="detail-situation" id="detailSituation"></div>
+        </div>
+
+        <!-- Your Rights -->
+        <div class="detail-section">
+          <div class="detail-section-title">&#9878;&#65039; <span data-i18n="yourRights">Deine Rechte</span></div>
+          <div class="detail-rights" id="detailRights"></div>
+        </div>
+
+        <!-- Steps -->
+        <div class="detail-section">
+          <div class="detail-section-title">&#128099; <span data-i18n="steps">Schritt für Schritt</span></div>
+          <div class="detail-steps" id="detailSteps"></div>
+        </div>
+
+        <!-- Deadline -->
+        <div class="detail-section" id="detailDeadlineSection">
+          <div class="info-box deadline">
+            <div class="info-box-icon">&#9200;</div>
+            <div class="info-box-content">
+              <div class="info-box-label" data-i18n="deadline">Frist</div>
+              <div class="info-box-text" id="detailDeadline"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compensation -->
+        <div class="detail-section" id="detailCompSection">
+          <div class="info-box compensation">
+            <div class="info-box-icon">&#128176;</div>
+            <div class="info-box-content">
+              <div class="info-box-label" data-i18n="compensation">Entschädigung</div>
+              <div class="info-box-text" id="detailComp"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Law References -->
+        <div class="detail-section">
+          <div class="detail-section-title">&#128214; <span data-i18n="lawReferences">Gesetzesgrundlagen</span></div>
+          <div class="law-tags" id="detailLaws"></div>
+        </div>
+
+        <!-- Template Button -->
+        <div class="detail-section">
+          <button class="template-btn" id="detailTemplateBtn" onclick="App.openTemplate()">
+            &#128196; <span data-i18n="openTemplate">Musterbrief öffnen</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Favorites View -->
+      <section id="favoritesView" class="hidden">
+        <div class="back-row">
+          <button class="back-btn" onclick="App.goHome()">&#8592; <span data-i18n="back">Zurück</span></button>
+          <h2 class="back-title" data-i18n="favorites">Favoriten</h2>
+        </div>
+        <div id="favoritesContent"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Template Modal -->
+  <div class="modal-overlay" id="templateModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" data-i18n="templateTitle">Musterbrief</div>
+        <button class="modal-close" onclick="App.closeTemplate()">&#10005;</button>
+      </div>
+      <div class="template-content" id="templateContent"></div>
+      <button class="btn btn-copy btn-block" id="copyBtn" onclick="App.copyTemplate()">
+        &#128203; <span data-i18n="copyTemplate">Brief kopieren</span>
+      </button>
+      <div class="template-hint" data-i18n="templateHint">Ersetze die [PLATZHALTER] mit deinen Daten.</div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" data-i18n="settings">Einstellungen</div>
+        <button class="modal-close" onclick="App.closeSettings()">&#10005;</button>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label" data-i18n="language">Sprache</div>
+        <div class="settings-options" id="langOptions"></div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label" data-i18n="theme">Design</div>
+        <div class="settings-options" id="themeOptions"></div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label" data-i18n="info">Information</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <a href="privacy-policy.html" class="btn btn-secondary btn-block" data-i18n="privacyPolicy">Datenschutzerklärung</a>
+          <div style="text-align:center; font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;">
+            MyRights v1.0.0<br>
+            <span data-i18n="disclaimer">Keine Rechtsberatung – nur allgemeine Information.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <span>&#9888;&#65039;</span>
+    <span data-i18n="disclaimerBanner">Keine Rechtsberatung – nur allgemeine Information über Verbraucherrechte.</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/rights-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
